@@ -1,0 +1,123 @@
+section .loginWrapper,
+section .registerWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid red;
+  min-width: 28%;
+  border-radius: 0.8rem 0.8rem 1rem 0rem;
+  overflow: hidden;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  section .loginWrapper,
+  section .registerWrapper {
+    min-width: 38%;
+  }
+}
+@media (max-width: 767px) {
+  section .loginWrapper,
+  section .registerWrapper {
+    min-width: 48%;
+    margin-top: 2rem;
+  }
+}
+@media (max-width: 425px) {
+  section .loginWrapper,
+  section .registerWrapper {
+    width: 90%;
+  }
+}
+
+section .loginWrapper h2,
+section .registerWrapper h2 {
+  color: rgb(255, 255, 255);
+  font-family: cursive;
+  font-size: 1.1rem;
+  text-align: center;
+  background-color: crimson;
+  padding: 0.8rem 0;
+  /* border-radius: 0  0 .5rem .5rem; */
+}
+
+section .loginWrapper form,
+section .registerWrapper form {
+  margin: 0 0;
+  padding: 0.5rem 0.7rem;
+}
+
+section .loginWrapper form .form-group,
+section .registerWrapper form .form-group {
+  margin: 0.7rem 0;
+}
+
+section .loginWrapper form .form-group label,
+section .registerWrapper form .form-group label {
+  font-size: 0.8rem;
+  color: #545454;
+}
+
+section .loginWrapper form input,
+section .registerWrapper form input {
+  width: 100%;
+  border: 0.5px solid crimson;
+  color: crimson;
+  outline: none;
+  padding: 10px 8px;
+  border-radius: 0.4rem;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+}
+
+section .loginWrapper form .password,
+section .registerWrapper form .password {
+  position: relative;
+}
+
+section .loginWrapper form small,
+section .registerWrapper form small {
+  position: absolute;
+  right: 0.2rem;
+  top: 2.5rem;
+  cursor: pointer;
+  background: #fff;
+  padding: 0 .5rem;
+  color: crimson;
+}
+
+section .loginWrapper form .haveAnAccount,
+section .registerWrapper form .haveAnAccount {
+  font-size: 0.75rem;
+  color: #474747;
+}
+section .loginWrapper form .haveAnAccount a,
+section .registerWrapper form .haveAnAccount a {
+  color: crimson;
+}
+
+section .loginWrapper form .loginBtn,
+section .registerWrapper form .loginBtn {
+  display: flex;
+  justify-content: center;
+}
+section .loginWrapper form .loginBtn button,
+section .registerWrapper form .loginBtn button {
+  margin: 0.5rem 0.3rem;
+  border-radius: 0.4rem;
+  padding: 0.3rem 1.5rem;
+  font-size: 0.9rem;
+  transition: all 200ms ease;
+  background-color: crimson;
+  border: 1px solid crimson;
+  color: white;
+  box-shadow: 0 3px 5px #3333333a;
+}
+section .loginWrapper form .loginBtn button:hover,
+section .registerWrapper form .loginBtn button:hover {
+  background-color: transparent;
+  border: 1px solid crimson;
+  box-shadow: 3px 3px 1px rgb(177, 18, 50);
+  color: crimson;
+}

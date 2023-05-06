@@ -1,0 +1,61 @@
+/*? HOME */
+main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+main .homeContent h2 {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  font-size: 1.5rem;
+  font-family: calibri;
+  color: crimson;
+}
+main .homeContent p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-family: calibri;
+  color: #5d5d5d;
+}
+
+main .actionBTN a {
+  margin: 1rem 0.3rem;
+  border-radius: 0.4rem;
+  padding: 0.3rem 1rem;
+  font-size: 0.9rem;
+  transition: all 400ms ease;
+}
+
+main .actionBTN a:first-child {
+  background-color: transparent;
+  border: 1px solid crimson;
+  color: crimson;
+}
+/* first child hover ends*/
+main .actionBTN a:first-child:hover {
+  box-shadow: -3px 3px 1px rgb(177, 18, 50);
+}
+/* first child hover ends*/
+
+main .actionBTN a:last-child {
+  background-color: crimson;
+  border: 1px solid crimson;
+  color: white;
+}
+/* second child hover starts */
+main .actionBTN a:last-child:hover {
+  background-color: transparent;
+  border: 1px solid crimson;
+  box-shadow: 3px 3px 1px rgb(177, 18, 50);
+  color: crimson;
+}
+/* second child hover starts */
+
+@media (max-width: 600px) {
+  main {
+    width: 90%;
+  }
+}
