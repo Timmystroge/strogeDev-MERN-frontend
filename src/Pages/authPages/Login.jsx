@@ -43,3 +43,42 @@ const Login = () => {
 };
 
 export default Login;
+
+// async function getUser() {
+//   try {
+//     const response = await axios.get('/user?ID=12345');
+//     console.log(response);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+
+// axios.post('/user', {
+//   firstName: 'Fred',
+//   lastName: 'Flintstone'
+// })
+// .then(function (response) {
+//   console.log(response);
+// })
+// .catch(function (error) {
+//   console.log(error);
+// });
+
+// axios({
+//   method: 'post',
+//   url: '/user/12345',
+//   data: {
+//     firstName: 'Fred',
+//     lastName: 'Flintstone'
+//   }
+// });
+
+// axios({
+//   method: 'get',
+//   url: 'https://bit.ly/2mTM3nY',
+//   responseType: 'stream'
+// })
+//   .then(function (response) {
+//     response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
+//   });
