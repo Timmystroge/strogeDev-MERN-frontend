@@ -76,7 +76,7 @@ export default Login;
 
 // axios({
 //   method: 'get',
-//   url: 'https://bit.ly/2mTM3nY',
+//   url: 'https://',
 //   responseType: 'stream'
 // })
 //   .then(function (response) {

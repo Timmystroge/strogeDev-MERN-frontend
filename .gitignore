@@ -12,6 +12,8 @@ node_modules
 /*node_modules
 /env
 /*env
+/Backend
+/*Backend
 dist
 dist-ssr
 *.local
