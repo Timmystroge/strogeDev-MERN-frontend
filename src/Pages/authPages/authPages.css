@@ -79,12 +79,15 @@ section .registerWrapper form .password {
 section .loginWrapper form small,
 section .registerWrapper form small {
   position: absolute;
-  right: 0.2rem;
-  top: 2.5rem;
+  right: 0.4rem;
+  top: 2.4rem;
   cursor: pointer;
-  background: #fff;
-  padding: 0 .5rem;
-  color: crimson;
+  background: crimson;
+  padding: .2rem  0.5rem;
+  color: white;
+  border: none;
+  border-radius: .2rem;
+  font-size: .7rem;
 }
 
 section .loginWrapper form .haveAnAccount,
@@ -108,11 +111,14 @@ section .registerWrapper form .loginBtn button {
   border-radius: 0.4rem;
   padding: 0.3rem 1.5rem;
   font-size: 0.9rem;
-  transition: all 200ms ease;
+  transition: all 400ms ease;
   background-color: crimson;
   border: 1px solid crimson;
   color: white;
   box-shadow: 0 3px 5px #3333333a;
+  display: inline-flex;
+  align-items: center;
+  gap:.5rem;
 }
 section .loginWrapper form .loginBtn button:hover,
 section .registerWrapper form .loginBtn button:hover {
