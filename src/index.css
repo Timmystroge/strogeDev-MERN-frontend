@@ -25,7 +25,24 @@ body {
   padding: 1.4rem 0;
   z-index: 2;
   transition: all 400ms linear;
-  font-size: .8rem;
+  font-size: 0.8rem;
+}
+.notfound {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+}
+.notfound h2 {
+  color: crimson;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.notfound p a {
+  color: crimson;
 }
 
 @media (max-width: 600px) {

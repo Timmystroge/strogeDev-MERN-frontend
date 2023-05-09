@@ -5,33 +5,6 @@ import UserAuth from "../authPages/UserAuth";
 import { Notification } from "../authPages/auth.js";
 import "./dashboard.css";
 
-const thoughts = [
-  {
-    id: "1",
-    time: "5th May, 2021",
-    thought:
-      "2 Lorem ipsum dolor sit amet consectetur adipisicing elit Quas dicta veritatis dolores voluptatibus sunt cupiditate",
-  },
-  {
-    id: "2",
-    time: "5th May, 2022",
-    thought:
-      "3 Lorem ipsum dolor sit amet consectetur adipisicing elit Quas dicta veritatis dolores voluptatibus sunt cupiditate",
-  },
-  {
-    id: "3",
-    time: "5th May, 2024",
-    thought:
-      "4 Lorem ipsum dolor sit amet consectetur adipisicing elit Quas dicta veritatis dolores voluptatibus sunt cupiditate",
-  },
-  {
-    id: "4",
-    time: "5th May, 2025",
-    thought:
-      "5 Lorem ipsum dolor sit amet consectetur adipisicing elit Quas dicta veritatis dolores voluptatibus sunt cupiditate",
-  },
-];
-
 const Dashboard = () => {
   //! set logged in user Credentials
   const [userCred, setUserCred] = useState({
@@ -46,7 +19,7 @@ const Dashboard = () => {
   const [write, setWrite] = useState(false);
 
   //! set user thoughts /* all user thought */
-  const [userThoughts, setUserThoughts] = useState(thoughts);
+  const [userThoughts, setUserThoughts] = useState([]);
 
   //! make an asynchronous request to backend endpoint to fetch user data
   async function getUser() {
@@ -69,11 +42,35 @@ const Dashboard = () => {
     });
   }
 
+  //! make an asynchronous request to backend endpoint to fetch user thought
+  async function getUserThoughts() {
+    await axios({
+      method: "post",
+      url: import.meta.env.VITE_LOCAL_DATA_URL_API,
+      data: JSON.stringify({
+        userID: sessionStorage.getItem("id"),
+      }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    }).then(function (data) {
+      if (data.status === 200 || data.statusText === "OK") {
+        if (data.data.msg === "success" && data.data.status === "noData") {
+        } else if (data.data.msg === "success" && data.data.status === "data") {
+          setUserThoughts((prevThoughts) => {
+            return [...prevThoughts, data.data.userData];
+          }); /* add fetched userThought to thoughts array  */
+        }
+      }
+    });
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     if (Thought === "") {
       notification(
-        "Baba, You wan submit empty thought? LMAO 😂 ",
+        "Paddy, You wan submit empty thought? LMAO 😂 ",
         "show",
         "3000"
       );
@@ -84,6 +81,7 @@ const Dashboard = () => {
           method: "post",
           url: import.meta.env.VITE_LOCAL_CREATE_URL_API,
           data: JSON.stringify({
+            id: sessionStorage.getItem("id"),
             thought: Thought,
           }),
           headers: {
@@ -91,15 +89,24 @@ const Dashboard = () => {
             "Content-Type": "application/json;charset=UTF-8",
           },
         }).then(function (data) {
-          console.log(data);
+          if (data.status === 200 || data.statusText === "OK") {
+            if (data.data.msg === "saved") {
+              notification("New thought added!", "show", "3000");
+              setThought("");
+              setTimeout(() => [window.open("/dashboard", "_self")], 500);
+            }
+          } else {
+            notification("Something went wrong!", "show", "3000");
+          }
         });
       }
-      // createNewThought();
+      createNewThought();
     }
   }
   //! make a request to endpoint Once!!!
   useEffect(() => {
     getUser();
+    getUserThoughts();
   }, []);
 
   //! run funtion to expand textarea when clicked
@@ -118,15 +125,31 @@ const Dashboard = () => {
 
   // handle delete thoughs
   function deleteThought(id) {
-    setUserThoughts((prev) => {
-      return prev.filter((thought) => {
-        if (thought.id !== id) {
-          notification("Thought Removed! : (", "show", "600");
-          return thought;
+    // make a delete request to delete thought
+    //! make an asynchronous request to backend endpoint to delete user thought
+    async function createNewThought() {
+      await axios({
+        method: "delete",
+        url: import.meta.env.VITE_LOCAL_DATA_URL_API,
+        data: JSON.stringify({
+          uid: id,
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      }).then(function (data) {
+        if (data.status === 200 || data.statusText === "OK") {
+          if (data.data.msg === "success") {
+            notification("Thought Deleted!", "show", "3000");
+            setTimeout(() => [window.open("/dashboard", "_self")], 500);
+          }
+        } else {
+          notification("Something went wrong!", "show", "3000");
         }
-        notification("Thought Removed! : (", "show", "600");
       });
-    });
+    }
+    createNewThought();
   }
   return (
     <>
@@ -145,7 +168,7 @@ const Dashboard = () => {
                   <span>
                     <i>Hi, {UserAuth() && userCred.fullname}.</i>
                   </span>{" "}
-                  <br /> Spill what's on your mind!
+                  <br /> Spill Out Your Mind, You're Safe!
                 </h2>
 
                 <form action="POST" onSubmit={handleSubmit}>
@@ -159,19 +182,21 @@ const Dashboard = () => {
                     onClick={handleWriteNow}
                   ></textarea>
                   <div className="keepMyMind">
-                    <button type="submit">Guide My Thought! </button>
+                    <button type="submit">Keep My Thought! </button>
                   </div>
                 </form>
 
                 {userThoughts.length !== 0 ? (
                   <div className="myMinds">
-                    {userThoughts.map((data) => {
+                    {userThoughts[0].map((data) => {
                       return (
-                        <article key={data.id}>
+                        <article key={data._id}>
                           <span className="timeStamp">
-                            <span>{data.time}</span>{" "}
+                            <span>{data.timeStamp}</span>{" "}
                             <span className="trash">
-                              <HiTrash onClick={() => deleteThought(data.id)} />
+                              <HiTrash
+                                onClick={() => deleteThought(data._id)}
+                              />
                             </span>
                           </span>
                           <p>{data.thought}</p>
@@ -182,7 +207,9 @@ const Dashboard = () => {
                 ) : (
                   <div className="noThoughts">
                     <small>
-                      Na untill i force you to spill out your fucking mind abi?
+                      Don't tell us you do not have anything on your mind!{" "}
+                      <br />
+                      Don't worry spill it out, you're safe!
                     </small>
                   </div>
                 )}

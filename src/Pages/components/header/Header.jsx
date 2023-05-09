@@ -10,7 +10,6 @@ import UserAuth from "../../authPages/UserAuth";
 
 // RENDERING STARTS
 const header = () => {
-  
   function logOut() {
     sessionStorage.clear();
     window.open("/", "_self");
@@ -24,7 +23,7 @@ const header = () => {
             {/* Logo */}
             <div className="logo">
               <h1>
-                <a href="/">Stroge-Dev</a>
+                <a href="/">StroMind.</a>
               </h1>
             </div>
 

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import passwordToggler, { Notification } from "./auth.js";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import "./authPages.css";
-const { log } = console;
 
 const Login = () => {
   //Set loading state
@@ -87,7 +86,7 @@ const Login = () => {
                   });
                 } else if (data.data.msg === "userNotExist") {
                   notification(
-                    `Account not found, Please create and account!`,
+                    `Account not found, Please create an account!`,
                     "show"
                   ); /* notify user */
                   setLoading(false);
@@ -161,9 +160,6 @@ const Login = () => {
               {/*  */}
               <p className="haveAnAccount">
                 Don't have an account?<a href="/signup"> Sign Up</a>
-              </p>
-              <p className="haveAnAccount">
-                Forgotten password?<a href="/signup"> Recover</a>
               </p>
 
               <div className="form-group">
