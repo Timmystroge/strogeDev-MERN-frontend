@@ -53,7 +53,7 @@ const Login = () => {
           try {
             await axios({
               method: "post",
-              url: import.meta.env.VITE_LOCAL_LOGIN_URL_API,
+              url: import.meta.env.VITE_LOGIN_URL_API,
               data: JSON.stringify({
                 email: email,
                 password: password,
