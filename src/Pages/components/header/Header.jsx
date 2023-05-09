@@ -10,6 +10,7 @@ import UserAuth from "../../authPages/UserAuth";
 
 // RENDERING STARTS
 const header = () => {
+  
   function logOut() {
     sessionStorage.clear();
     window.open("/", "_self");
@@ -36,12 +37,14 @@ const header = () => {
                 {/* if user is logged in show logOut btn */}
                 {UserAuth() && (
                   <li>
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/dashboard">My Account</a>
                   </li>
                 )}
                 {UserAuth() && (
                   <li>
-                    <a onClick={logOut}>Logout</a>
+                    <a href="#" onClick={logOut}>
+                      Logout
+                    </a>
                   </li>
                 )}
                 {/* show login/signup is user is not logged in */}

@@ -69,8 +69,6 @@ const Register = () => {
                   "Content-Type": "application/json;charset=UTF-8",
                 },
               }).then((data) => {
-                console.log(data.data.msg);
-
                 if (data.statusText === "OK" || response.status === 200) {
                   if (data.data.msg === "success") {
                     const userID = data.data.userID;
@@ -78,7 +76,7 @@ const Register = () => {
                     notification(`Account Created Successfully!`, "show");
                     setTimeout(() => {
                       window.open("/dashboard", "_self");
-                    }, 100);
+                    }, 1000);
 
                     setLoading(false);
 

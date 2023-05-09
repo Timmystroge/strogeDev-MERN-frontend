@@ -1,5 +1,152 @@
 section .dashboard {
-    position: relative;
-    padding-top: 6rem;
-    text-align: center;
+  position: relative;
+  padding-top: 6rem;
+  text-align: center;
+}
+section .dashboard .createThought h2 {
+  color: crimson;
+  font-weight: bold;
+  font-family: cursive;
+  margin: 0.1rem 0 0.5rem;
+  font-size: 1.2rem;
+}
+section .dashboard .createThought h2 span {
+  color: #676767;
+  font-weight: normal;
+  font-family: calibri;
+  margin: 0rem 0 0rem;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+section .dashboard .createThought form {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.057);
+  margin: 0 0 1.5rem;
+  padding: 0 0 1rem;
+}
+section .dashboard .createThought form textarea {
+  border: 1px solid crimson;
+  outline: none;
+  font-size: 0.85rem;
+  min-width: 40%;
+  width: 40%;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+  color: #676767;
+  box-shadow: 0 1px 5px #00000025;
+  /* transition: all 500ms ease; */
+}
+@media (max-width: 767px) {
+  section .dashboard .createThought form textarea {
+    min-width: 60%;
+    /* width: 40%; */
+  }
+}
+@media (max-width: 600px) {
+  section .dashboard .createThought form textarea {
+    min-width: 80%;
+  }
+  section .dashboard .createThought h2 {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 1rem;
+  }
+  section .dashboard .createThought h2 span {
+    color: #676767;
+    font-weight: normal;
+    font-family: calibri;
+    font-size: .9rem;
+  }
+}
+@media (max-width: 425px) {
+  section .dashboard .createThought form textarea {
+    min-width: 100%;
+  }
+}
+section .dashboard .createThought form textarea::-webkit-scrollbar {
+  display: none;
+}
+
+section .dashboard .createThought form .keepMyMind {
+  display: flex;
+  justify-content: center;
+}
+section .dashboard .createThought form .keepMyMind button {
+  margin: 0.8rem 0.3rem;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.8rem;
+  transition: all 400ms ease;
+  background-color: crimson;
+  border: 1px solid crimson;
+  color: white;
+  box-shadow: 0 3px 5px #3333333a;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+section .dashboard .createThought form .keepMyMind button:hover {
+  background-color: transparent;
+  border: 1px solid crimson;
+  box-shadow: 3px 3px 1px rgb(177, 18, 50);
+  color: crimson;
+}
+
+/* MY MIND */
+section .dashboard .createThought .myMinds {
+  margin: 0 0 3rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+section .dashboard .createThought .myMinds article {
+  background-color: rgb(255, 255, 255);
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 1px #3333331c;
+  border-left: 5px solid crimson;
+  border-top: 1px solid #33333332;
+  border-right: 1px solid #33333332;
+  border-bottom: 1px solid #33333332;
+  overflow: hidden;
+}
+section .dashboard .createThought .myMinds article .timeStamp {
+  text-align: center !important;
+  color: #909090;
+  background-color: #eeeeee9c;
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: -8px;
+  box-shadow: 0 0px 7px inset #3333331f;
+}
+section .dashboard .createThought .myMinds article .timeStamp .trash {
+  color: crimson;
+  cursor: pointer;
+}
+section .dashboard .createThought .myMinds article p {
+  margin-top: 0.5rem;
+  text-align: left;
+}
+.noThoughts {
+    color: #676767;
+}
+@media (max-width: 900px) {
+  section .dashboard .createThought .myMinds {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  section .dashboard .createThought .myMinds {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 475px) {
+  section .dashboard .createThought .myMinds {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

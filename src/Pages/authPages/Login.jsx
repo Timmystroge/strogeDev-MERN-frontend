@@ -54,7 +54,7 @@ const Login = () => {
           try {
             await axios({
               method: "post",
-              url: process.env.VITE_LOCAL_LOGIN_URL_API,
+              url: import.meta.env.VITE_LOCAL_LOGIN_URL_API,
               data: JSON.stringify({
                 email: email,
                 password: password,
@@ -64,7 +64,6 @@ const Login = () => {
                 "Content-Type": "application/json;charset=UTF-8",
               },
             }).then((data) => {
-              console.log(data.data.msg);
               if (data.statusText === "OK" || response.status === 200) {
                 if (data.data.msg === "success") {
                   const userID = data.data.userID; /* Get userid */
@@ -77,7 +76,7 @@ const Login = () => {
                   notification(`Login Successful!`, "show"); /* notify user */
                   setTimeout(() => {
                     window.open("/dashboard", "_self");
-                  }, 100);
+                  }, 500);
 
                   setLoading(false);
 

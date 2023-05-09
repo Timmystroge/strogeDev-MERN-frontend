@@ -1,6 +1,7 @@
 import React from "react";
 import CtaBtns from "../components/CtaBtns";
 import "./home.css";
+import UserAuth from "../authPages/UserAuth";
 
 const Home = () => {
   return (
@@ -15,8 +16,13 @@ const Home = () => {
             </p>
 
             <div className="actionBTN">
-              <CtaBtns route="/login" text="Login" /> {/* Login */}
-              <CtaBtns route="/signup" text="Signup" /> {/* Register */}
+              {UserAuth() && <CtaBtns route="/dashboard" text="My Dashboard" />}
+              {!UserAuth() && (
+                <>
+                  <CtaBtns route="/login" text="Login" />
+                  <CtaBtns route="/signup" text="Signup" />{" "}
+                </>
+              )}
             </div>
           </div>
         </div>

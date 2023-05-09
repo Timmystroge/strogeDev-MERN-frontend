@@ -17,9 +17,11 @@ nav {
 nav .logo h1 {
   font-size: 1.3rem;
   font-weight: bold;
+  outline: none;
 }
 
 .navLinks ul li {
+  outline: none;
   display: inline-block;
   margin: 0 0.7rem;
   font-family: calibri;

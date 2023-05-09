@@ -9,16 +9,17 @@ const passwordToggler = (password, toggler) => {
   }
 };
 
-const Notification = (notify, MSG, msg, action) => {
+const Notification = (notify, MSG, msg, action, time = 3000) => {
   if (action === "close") {
     notify.style.top = "-10rem";
   } else if (action === "show") {
+    notify.style.display = "block";
     MSG.textContent = msg;
     notify.style.top = "0";
     // close notification after 2000 miliseconds
     setTimeout(() => {
       notify.style.top = "-10rem";
-    }, 3000);
+    }, time);
   }
 };
 export { passwordToggler as default, Notification };

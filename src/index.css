@@ -16,7 +16,7 @@ body {
 .notification {
   width: 100%;
   height: auto;
-  position: relative;
+  position: absolute;
   top: -10rem;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
