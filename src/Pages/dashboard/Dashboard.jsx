@@ -29,6 +29,8 @@ const Dashboard = () => {
       });
     });
   }
+  // getUser();
+  useEffect(() => {getUser();}, []);
   return (
     <>
       {UserAuth() ? (
