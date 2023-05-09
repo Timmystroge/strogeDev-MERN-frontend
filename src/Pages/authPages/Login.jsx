@@ -1,9 +1,14 @@
+import axios from "axios";
 import React, { useState } from "react";
-const { log } = console;
 import passwordToggler, { Notification } from "./auth.js";
+import { HiArrowNarrowRight } from "react-icons/hi";
 import "./authPages.css";
+const { log } = console;
 
 const Login = () => {
+  //Set loading state
+  const [loading, setLoading] = useState(false);
+
   // Set User Login Details to an empty js Object
   const [userLogin, setUserLogin] = useState({
     email: "",
@@ -32,16 +37,78 @@ const Login = () => {
 
   // handle data when form is submitted
   function handleSubmit(event) {
+    setLoading(true); /* set button status to loading */
     event.preventDefault();
+
     const { email, password } = userLogin;
     // email validation
     if (!email.includes("@")) {
       notification(`Missing '@', Please Include '@example.com!'`, "show");
+      setLoading(false);
     } else {
       if (password.length < 6) {
         notification(`Password must be at least 6 chars long!`, "show");
+        setLoading(false);
       } else {
-        notification(`You can proceed!`, "show");
+        async function login() {
+          try {
+            await axios({
+              method: "post",
+              url: import.meta.env.VITE_LOCAL_LOGIN_URL_API,
+              data: JSON.stringify({
+                email: email,
+                password: password,
+              }),
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json;charset=UTF-8",
+              },
+            }).then((data) => {
+              console.log(data.data.msg);
+              if (data.statusText === "OK" || response.status === 200) {
+                if (data.data.msg === "success") {
+                  const userID = data.data.userID; /* Get userid */
+
+                  sessionStorage.setItem(
+                    "id",
+                    userID
+                  ); /* Save userid to session */
+
+                  notification(`Login Successful!`, "show"); /* notify user */
+                  setTimeout(() => {
+                    window.open("/dashboard", "_self");
+                  }, 100);
+
+                  setLoading(false);
+
+                  // clear form input
+                  setUserLogin({
+                    email: "",
+                    password: "",
+                  });
+                } else if (data.data.msg === "userNotExist") {
+                  notification(
+                    `Account not found, Please create and account!`,
+                    "show"
+                  ); /* notify user */
+                  setLoading(false);
+                } else if (data.data.msg === "passwordNotMatch") {
+                  notification(`Incorrect password!`, "show"); /* notify user */
+                  setLoading(false);
+                }
+              } else {
+                // something went wrong
+                notification(`Error creating your account, Try again!`, "show");
+                setLoading(false);
+              }
+            });
+          } catch (error) {
+            // console.error(error.message);
+            notification(`Something went wrong, ${error.message}!`, "show");
+            setLoading(false); /* set button status to not-loading */
+          }
+        }
+        login();
       }
     }
   }
@@ -102,7 +169,13 @@ const Login = () => {
 
               <div className="form-group">
                 <div className="loginBtn">
-                  <button type="submit">Login</button>
+                  {loading ? (
+                    <button type="submit">Logging in...</button>
+                  ) : (
+                    <button type="submit">
+                      Login <HiArrowNarrowRight />
+                    </button>
+                  )}
                 </div>
               </div>
             </form>
@@ -114,35 +187,6 @@ const Login = () => {
 };
 
 export default Login;
-
-// async function getUser() {
-//   try {
-//     const response = await axios.get('/user?ID=12345');
-//     console.log(response);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-// axios.post('/user', {
-//   firstName: 'Fred',
-//   lastName: 'Flintstone'
-// })
-// .then(function (response) {
-//   console.log(response);
-// })
-// .catch(function (error) {
-//   console.log(error);
-// });
-
-// axios({
-//   method: 'post',
-//   url: '/user/12345',
-//   data: {
-//     firstName: 'Fred',
-//     lastName: 'Flintstone'
-//   }
-// });
 
 // axios({
 //   method: 'get',

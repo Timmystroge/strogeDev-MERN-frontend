@@ -18,7 +18,7 @@ const Notification = (notify, MSG, msg, action) => {
     // close notification after 2000 miliseconds
     setTimeout(() => {
       notify.style.top = "-10rem";
-    }, 4000);
+    }, 3000);
   }
 };
 export { passwordToggler as default, Notification };

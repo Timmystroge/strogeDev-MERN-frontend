@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import passwordToggler, { Notification } from "./auth.js";
 import { HiArrowNarrowRight } from "react-icons/hi";
@@ -59,33 +59,50 @@ const Register = () => {
               await axios({
                 method: "post",
                 url: import.meta.env.VITE_LOCAL_REGISTER_URL_API,
-                data: {
+                data: JSON.stringify({
                   fullname: fullname,
                   email: email,
                   password: password,
-                },
+                }),
                 headers: {
                   Accept: "application/json",
                   "Content-Type": "application/json;charset=UTF-8",
                 },
               }).then((data) => {
-                console.log(data.status);
-                console.log(data.statusText);
-                setLoading(false); /* set button status to not-loading */
+                console.log(data.data.msg);
 
-                // redirect to dashboard
-                setTimeout(() => {
-                  // window.open("/dashboard", "_self");
+                if (data.statusText === "OK" || response.status === 200) {
+                  if (data.data.msg === "success") {
+                    const userID = data.data.userID;
+                    sessionStorage.setItem("id", userID);
+                    notification(`Account Created Successfully!`, "show");
+                    setTimeout(() => {
+                      window.open("/dashboard", "_self");
+                    }, 100);
 
-                  setUserReg({
-                    fullname: "",
-                    email: "",
-                    password: "",
-                  });
-                }, 100);
+                    setLoading(false);
+
+                    // clear form input
+                    setUserReg({
+                      fullname: "",
+                      email: "",
+                      password: "",
+                    });
+                  } else if (data.data.msg === "emailExist") {
+                    notification(`User with this email already exist!`, "show");
+                    setLoading(false);
+                  }
+                } else {
+                  // something went wrong
+                  notification(
+                    `Error creating your account, Try again!`,
+                    "show"
+                  );
+                }
               });
             } catch (error) {
-              console.error(error.message);
+              // console.error(error.message);
+              notification(`Something went wrong, ${error.message}!`, "show");
               setLoading(false); /* set button status to not-loading */
             }
           }

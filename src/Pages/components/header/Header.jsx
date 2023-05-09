@@ -6,9 +6,15 @@ import Register from "../../authPages/Register";
 import NotFound from "../../NotFound.jsx";
 import "./header.css";
 import Dashboard from "../../dashboard/Dashboard";
+import UserAuth from "../../authPages/UserAuth";
 
 // RENDERING STARTS
 const header = () => {
+  function logOut() {
+    sessionStorage.clear();
+    window.open("/", "_self");
+  }
+
   return (
     <>
       <header>
@@ -27,12 +33,29 @@ const header = () => {
                 <li>
                   <a href="/">Home</a>
                 </li>
-                <li>
-                  <a href="/login">Login</a>
-                </li>
-                <li>
-                  <a href="/signup">Signup</a>
-                </li>
+                {/* if user is logged in show logOut btn */}
+                {UserAuth() && (
+                  <li>
+                    <a href="/dashboard">Dashboard</a>
+                  </li>
+                )}
+                {UserAuth() && (
+                  <li>
+                    <a onClick={logOut}>Logout</a>
+                  </li>
+                )}
+                {/* show login/signup is user is not logged in */}
+                {!UserAuth() && (
+                  <li>
+                    <a href="/login">Login</a>
+                  </li>
+                )}
+                {/* show login/signup is user is not logged in */}
+                {!UserAuth() && (
+                  <li>
+                    <a href="/signup">Signup</a>
+                  </li>
+                )}
               </ul>
             </div>
           </nav>
@@ -44,7 +67,7 @@ const header = () => {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Register />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route exact path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
