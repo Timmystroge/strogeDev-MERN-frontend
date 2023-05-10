@@ -11,12 +11,23 @@ const Home = () => {
           <div className="homeContent">
             {/* if user is logged in, diplay APP name */}
             {UserAuth() && <h2>StroMind.</h2>}
+            {UserAuth() && (
+              <p>
+                Keep Your Thoughts Safe Till LolDays & Whenever! <br /> Worry less! Your thought is safe with us.
+              </p>
+            )}
             {/* if user is not logged in, diplay welcome APP name */}
-            {!UserAuth() && <h2>Welcome to StroMind.</h2>}
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Laudantium nemo sit possimus harum.
-            </p>
+            {!UserAuth() && <h2><span className="welcome">Welcome to</span> StroMind.</h2>}
+            {!UserAuth() && (
+              <p>
+                Have you any Thoughts or Ideas you can't disclose to people so as to
+                keep it safe?
+                <br />
+                <b style={{color: "crimson"}}>StroMind</b> is designed to Keep your ideas safe!{" "}
+                <br /> Start by signing up if you don't have an account{" "}
+                <br /> <b style={{color: "crimson"}}>or</b> <br /> Sign In if you have an acoount.
+              </p>
+            )}
 
             <div className="actionBTN">
               {/* if user is logged in, display my account btn */}
@@ -24,8 +35,8 @@ const Home = () => {
               {/* if user is not logged in, display login and register btn */}
               {!UserAuth() && (
                 <>
-                  <CtaBtns route="/login" text="Login" />
-                  <CtaBtns route="/signup" text="Signup" />{" "}
+                  <CtaBtns route="/login" text="Sign In" />
+                  <CtaBtns route="/signup" text="Sign Up" />
                 </>
               )}
             </div>

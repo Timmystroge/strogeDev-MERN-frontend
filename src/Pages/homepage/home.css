@@ -14,15 +14,22 @@ main .homeContent h2 {
   font-family: calibri;
   color: crimson;
 }
+main .homeContent h2 .welcome{
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  font-size: 1.5rem;
+  font-family: calibri;
+  color: #333;
+}
 main .homeContent p {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: 1rem;
   font-family: calibri;
   color: #5d5d5d;
 }
 
 main .actionBTN a {
-  margin: 1rem 0.3rem;
+  margin: 1rem 0.5rem;
   border-radius: 0.4rem;
   padding: 0.3rem 1rem;
   font-size: 0.9rem;
@@ -56,6 +63,6 @@ main .actionBTN a:last-child:hover {
 
 @media (max-width: 600px) {
   main {
-    width: 90%;
+    width: 100%;
   }
 }

@@ -34,10 +34,10 @@ const Label = ({ htmlfor, labelfor }) => {
 };
 
 //button
-const Button = ({ type, text, icon }) => {
+const Button = ({ type, text, icon, disabled }) => {
   return (
     <>
-      <button type={type}>
+      <button type={type} disabled={disabled}>
         {text}
         {icon}
       </button>

@@ -46,18 +46,14 @@ const header = () => {
                     </a>
                   </li>
                 )}
+
                 {/* show login/signup is user is not logged in */}
                 {!UserAuth() && (
                   <li>
-                    <a href="/login">Login</a>
+                    <a href="/login">Sign In</a>
                   </li>
                 )}
-                {/* show login/signup is user is not logged in */}
-                {!UserAuth() && (
-                  <li>
-                    <a href="/signup">Signup</a>
-                  </li>
-                )}
+                
               </ul>
             </div>
           </nav>

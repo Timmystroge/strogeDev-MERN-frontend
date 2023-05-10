@@ -63,7 +63,7 @@ const Register = () => {
             try {
               await axios({
                 method: "post",
-                url: import.meta.env.VITE_LOCAL_REGISTER_URL_API,
+                url: import.meta.env.VITE_REGISTER_URL_API,
                 data: JSON.stringify({
                   fullname: fullname,
                   email: email,
@@ -74,7 +74,7 @@ const Register = () => {
                   "Content-Type": "application/json;charset=UTF-8",
                 },
               }).then((data) => {
-                if (data.statusText === "OK" || response.status === 200) {
+                if (data.statusText === "OK" || data.status === 200) {
                   if (data.data.msg === "success") {
                     const userID = data.data.userID;
                     sessionStorage.setItem("id", userID);

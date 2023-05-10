@@ -58,7 +58,7 @@ const Login = () => {
           try {
             await axios({
               method: "post",
-              url: import.meta.env.VITE_LOCAL_LOGIN_URL_API,
+              url: import.meta.env.VITE_LOGIN_URL_API,
               data: JSON.stringify({
                 email: email,
                 password: password,
@@ -68,7 +68,7 @@ const Login = () => {
                 "Content-Type": "application/json;charset=UTF-8",
               },
             }).then((data) => {
-              if (data.statusText === "OK" || response.status === 200) {
+              if (data.statusText === "OK" || data.status === 200) {
                 if (data.data.msg === "success") {
                   const userID = data.data.userID; /* Get userid */
 
@@ -106,6 +106,7 @@ const Login = () => {
               }
             });
           } catch (error) {
+            
             // console.error(error.message);
             notification(`Something went wrong, ${error.message}!`, "show");
             setLoading(false); /* set button status to not-loading */
@@ -172,11 +173,11 @@ const Login = () => {
               <div className="form-group">
                 <div className="loginBtn">
                   {loading ? (
-                    <Button type="submit" text="Logging In..." />
+                    <Button type="button" text="Signing In..." />
                   ) : (
                     <Button
                       type="submit"
-                      text="Login"
+                      text="Sign In"
                       icon={<HiArrowNarrowRight />}
                     />
                   )}

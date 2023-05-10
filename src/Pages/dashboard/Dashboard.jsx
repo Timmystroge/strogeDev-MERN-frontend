@@ -22,11 +22,14 @@ const Dashboard = () => {
   //! set user thoughts /* all user thought */
   const [userThoughts, setUserThoughts] = useState([]);
 
+  //! set user thoughts /* all user thought */
+  const [saveThought, setSaveThought] = useState(false);
+
   //! make an asynchronous request to backend endpoint to fetch user data
   async function getUser() {
     await axios({
       method: "post",
-      url: import.meta.env.VITE_LOCAL_DASHBOARD_URL_API,
+      url: import.meta.env.VITE_DASHBOARD_URL_API,
       data: JSON.stringify({
         userID: sessionStorage.getItem("id"),
       }),
@@ -52,7 +55,7 @@ const Dashboard = () => {
   async function getUserThoughts() {
     await axios({
       method: "post",
-      url: import.meta.env.VITE_LOCAL_DATA_URL_API,
+      url: import.meta.env.VITE_DATA_URL_API,
       data: JSON.stringify({
         userID: sessionStorage.getItem("id"),
       }),
@@ -75,6 +78,10 @@ const Dashboard = () => {
   //! handle submit request
   function handleSubmit(e) {
     e.preventDefault();
+
+    // set setSaveThought to true, to show user app is processing their request
+    setSaveThought(true);
+    //
     if (Thought === "") {
       notification(
         "Paddy, You wan submit empty thought? LMAO 😂 ",
@@ -86,7 +93,7 @@ const Dashboard = () => {
       async function createNewThought() {
         await axios({
           method: "post",
-          url: import.meta.env.VITE_LOCAL_CREATE_URL_API,
+          url: import.meta.env.VITE_CREATE_URL_API,
           data: JSON.stringify({
             id: sessionStorage.getItem("id"),
             thought: Thought,
@@ -101,9 +108,15 @@ const Dashboard = () => {
               notification("New thought added!", "show", "3000");
               setThought("");
               setTimeout(() => [window.open("/dashboard", "_self")], 500);
+
+              // set setSaveThought to false.
+              setSaveThought(false);
             }
           } else {
             notification("Something went wrong!", "show", "3000");
+
+            // set setSaveThought to false.
+            setSaveThought(false);
           }
         });
       }
@@ -137,7 +150,7 @@ const Dashboard = () => {
     async function createNewThought() {
       await axios({
         method: "delete",
-        url: import.meta.env.VITE_LOCAL_DATA_URL_API,
+        url: import.meta.env.VITE_DATA_URL_API,
         data: JSON.stringify({
           uid: id,
         }),
@@ -191,7 +204,15 @@ const Dashboard = () => {
                   <div className="keepMyMind">
                     {/* display submit button only if user cliks to start adding thought */}
                     {Thought !== "" ? (
-                      <Button type="submit" text="Keep My Thought!" />
+                      !saveThought ? (
+                        <Button type="submit" text="Keep My Thought!" />
+                      ) : (
+                        <Button
+                          type="button"
+                          disabled="disabled"
+                          text="Processing..."
+                        />
+                      )
                     ) : (
                       ""
                     )}
@@ -222,7 +243,7 @@ const Dashboard = () => {
                       Don't tell us you do not have anything on your mind!{" "}
                       <br />
                       Don't worry, Spill it out you're safe! <br />
-                      <i>end-to-end encryption</i>
+                      <i>fully-encrypted</i>
                     </small>
                   </div>
                 )}
