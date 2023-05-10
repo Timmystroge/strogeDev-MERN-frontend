@@ -7,6 +7,7 @@ import NotFound from "../../NotFound.jsx";
 import "./header.css";
 import Dashboard from "../../dashboard/Dashboard";
 import UserAuth from "../../authPages/UserAuth";
+import { BsBoxArrowInRight, BsBoxArrowLeft } from "react-icons/bs";
 
 // RENDERING STARTS
 const header = () => {
@@ -33,16 +34,11 @@ const header = () => {
                 <li>
                   <a href="/">Home</a>
                 </li>
-                {/* if user is logged in show logOut btn */}
+
                 {UserAuth() && (
                   <li>
-                    <a href="/dashboard">My Account</a>
-                  </li>
-                )}
-                {UserAuth() && (
-                  <li>
-                    <a href="#" onClick={logOut}>
-                      Logout
+                    <a href="#" onClick={logOut} className="logout">
+                      <BsBoxArrowLeft className="logoutIcon" /> SignOut
                     </a>
                   </li>
                 )}
@@ -50,10 +46,11 @@ const header = () => {
                 {/* show login/signup is user is not logged in */}
                 {!UserAuth() && (
                   <li>
-                    <a href="/login">Sign In</a>
+                    <a href="/login" className="logout">
+                      <BsBoxArrowInRight className="logoutIcon" /> Sign In
+                    </a>
                   </li>
                 )}
-                
               </ul>
             </div>
           </nav>

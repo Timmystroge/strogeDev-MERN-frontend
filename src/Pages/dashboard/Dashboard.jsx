@@ -108,9 +108,6 @@ const Dashboard = () => {
               notification("New thought added!", "show", "3000");
               setThought("");
               setTimeout(() => [window.open("/dashboard", "_self")], 500);
-
-              // set setSaveThought to false.
-              setSaveThought(false);
             }
           } else {
             notification("Something went wrong!", "show", "3000");
@@ -184,7 +181,11 @@ const Dashboard = () => {
               <div className="createThought">
                 <h2>
                   <span>
-                    <i>Hi, {UserAuth() && userCred.fullname}.</i>
+                    <i>
+                      {UserAuth() && userCred.fullname
+                        ? "Hi, " + userCred.fullname + "."
+                        : "Loading..."}
+                    </i>
                   </span>{" "}
                   <br /> Spill Out Your Mind, You're Safe!
                 </h2>
@@ -221,21 +222,25 @@ const Dashboard = () => {
 
                 {userThoughts.length !== 0 ? (
                   <div className="myMinds">
-                    {userThoughts[0].map((data) => {
-                      return (
-                        <article key={data._id}>
-                          <span className="timeStamp">
-                            <span>{data.timeStamp}</span>{" "}
-                            <span className="trash">
-                              <HiTrash
-                                onClick={() => deleteThought(data._id)}
-                              />
+                    {userThoughts ? (
+                      userThoughts[0].map((data) => {
+                        return (
+                          <article key={data._id}>
+                            <span className="timeStamp">
+                              <span>{data.timeStamp}</span>{" "}
+                              <span className="trash">
+                                <HiTrash
+                                  onClick={() => deleteThought(data._id)}
+                                />
+                              </span>
                             </span>
-                          </span>
-                          <p>{data.thought}</p>
-                        </article>
-                      );
-                    })}
+                            <p>{data.thought}</p>
+                          </article>
+                        );
+                      })
+                    ) : (
+                      <p>Loading...</p>
+                    )}
                   </div>
                 ) : (
                   <div className="noThoughts">

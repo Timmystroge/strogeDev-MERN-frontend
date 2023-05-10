@@ -82,7 +82,7 @@ const Login = () => {
                     window.open("/dashboard", "_self");
                   }, 500);
 
-                  setLoading(false);
+                  // setLoading(false);
 
                   // clear form input
                   setUserLogin({
@@ -173,7 +173,7 @@ const Login = () => {
               <div className="form-group">
                 <div className="loginBtn">
                   {loading ? (
-                    <Button type="button" text="Signing In..." />
+                    <Button type="button" disabled="disabled" text="Signing In..." />
                   ) : (
                     <Button
                       type="submit"

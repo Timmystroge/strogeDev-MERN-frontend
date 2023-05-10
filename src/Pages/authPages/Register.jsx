@@ -83,7 +83,7 @@ const Register = () => {
                       window.open("/dashboard", "_self");
                     }, 1000);
 
-                    setLoading(false);
+                    // setLoading(false);
 
                     // clear form input
                     setUserReg({
@@ -183,7 +183,7 @@ const Register = () => {
             <div className="form-group">
               <div className="loginBtn">
                 {loading ? (
-                  <Button type="submit" text="Signing up... " />
+                  <Button type="button" disabled="disabled" text="Signing up... " />
                 ) : (
                   <Button
                     type="submit"

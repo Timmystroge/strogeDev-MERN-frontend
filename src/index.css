@@ -36,10 +36,18 @@ body {
   text-align: center;
   width: 100%;
 }
-.notfound h2 {
+.notfound .errorIcon {
   color: crimson;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 4.2rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+.notfound h2 {
+  color: #545454;
+  font-weight: bold;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 .notfound p a {
