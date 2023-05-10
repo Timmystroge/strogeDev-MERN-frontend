@@ -2,6 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import passwordToggler, { Notification } from "./auth.js";
 import { HiArrowNarrowRight } from "react-icons/hi";
+import Input, {
+  Button,
+  Label,
+  NotificationPop,
+} from "../components/Elements.jsx";
 import "./authPages.css";
 
 const Login = () => {
@@ -38,8 +43,8 @@ const Login = () => {
   function handleSubmit(event) {
     setLoading(true); /* set button status to loading */
     event.preventDefault();
-
     const { email, password } = userLogin;
+
     // email validation
     if (!email.includes("@")) {
       notification(`Missing '@', Please Include '@example.com!'`, "show");
@@ -53,7 +58,7 @@ const Login = () => {
           try {
             await axios({
               method: "post",
-              url: import.meta.env.VITE_LOGIN_URL_API,
+              url: import.meta.env.VITE_LOCAL_LOGIN_URL_API,
               data: JSON.stringify({
                 email: email,
                 password: password,
@@ -121,9 +126,7 @@ const Login = () => {
   return (
     <>
       {/* notification */}
-      <div className="notification">
-        <p className="msg">Notification Message</p>
-      </div>
+      <NotificationPop className="notification" textClass="msg" />
       {/* notification */}
 
       <section>
@@ -133,24 +136,28 @@ const Login = () => {
             <form action="" method="POST" onSubmit={handleSubmit}>
               {/* Email */}
               <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
+                {/* label */}
+                <Label htmlfor="email" labelfor="Email" />
+                {/* input */}
+                <Input
                   type="text"
                   placeholder="Email"
                   onChange={handleChange}
                   name="email"
-                  autoFocus="on"
+                  autofocus="on"
                 />
               </div>
               {/* Password */}
               <div className="form-group password">
-                <label htmlFor="password">Password</label>
-                <input
-                  className="passwordInput"
+                {/* label */}
+                <Label htmlfor="password" labelfor="Password" />
+                {/* input */}
+                <Input
                   type="password"
                   placeholder="Password"
                   onChange={handleChange}
                   name="password"
+                  className="passwordInput"
                 />
                 <small className="show_hide" onClick={toggle}>
                   show
@@ -165,11 +172,13 @@ const Login = () => {
               <div className="form-group">
                 <div className="loginBtn">
                   {loading ? (
-                    <button type="submit">Logging in...</button>
+                    <Button type="submit" text="Logging In..." />
                   ) : (
-                    <button type="submit">
-                      Login <HiArrowNarrowRight />
-                    </button>
+                    <Button
+                      type="submit"
+                      text="Login"
+                      icon={<HiArrowNarrowRight />}
+                    />
                   )}
                 </div>
               </div>
@@ -182,12 +191,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// axios({
-//   method: 'get',
-//   url: 'https://',
-//   responseType: 'stream'
-// })
-//   .then(function (response) {
-//     response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
-//   });

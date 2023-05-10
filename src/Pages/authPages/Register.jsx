@@ -3,6 +3,11 @@ import axios from "axios";
 import passwordToggler, { Notification } from "./auth.js";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import "./authPages.css";
+import Input, {
+  Button,
+  Label,
+  NotificationPop,
+} from "../components/Elements.jsx";
 
 const Register = () => {
   // Set User Register Details to an empty js Object
@@ -112,18 +117,16 @@ const Register = () => {
   }
 
   // toggle show and hide password
-
   function toggle() {
     const toggler = document.querySelector(".show_hide");
     const password = document.querySelector(".passwordInput");
     passwordToggler(password, toggler);
   }
+
   return (
     <>
       {/* notification */}
-      <div className="notification">
-        <p className="msg">Notification Message</p>
-      </div>
+      <NotificationPop className="notification" textClass="msg" />
       {/* notification */}
 
       <section>
@@ -132,21 +135,22 @@ const Register = () => {
           <form method="POST" onSubmit={handleSubmit}>
             {/* Email */}
             <div className="form-group">
-              <label htmlFor="email">Fullname</label>
-              <input
+              <Label htmlFor="fullname" labelfor="Fullname" />
+
+              <Input
                 type="text"
                 placeholder="Fullname"
                 onChange={handleChange}
                 name="fullname"
-                autoFocus="on"
+                autofocus="on"
                 value={userReg.fullname}
               />
             </div>
 
             {/* Email */}
             <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
+              <Label htmlFor="email" labelfor="Email" />
+              <Input
                 type="text"
                 placeholder="Email"
                 onChange={handleChange}
@@ -157,8 +161,8 @@ const Register = () => {
 
             {/* Password */}
             <div className="form-group password">
-              <label htmlFor="email">Password</label>
-              <input
+              <Label htmlFor="password" labelfor="Password" />
+              <Input
                 type="password"
                 placeholder="Password"
                 className="passwordInput"
@@ -179,11 +183,13 @@ const Register = () => {
             <div className="form-group">
               <div className="loginBtn">
                 {loading ? (
-                  <button type="submit">Signing up... </button>
+                  <Button type="submit" text="Signing up... " />
                 ) : (
-                  <button type="submit">
-                    Sign Up <HiArrowNarrowRight />{" "}
-                  </button>
+                  <Button
+                    type="submit"
+                    text=" Sign Up"
+                    icon={<HiArrowNarrowRight />}
+                  />
                 )}
               </div>
             </div>

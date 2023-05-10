@@ -4,6 +4,7 @@ import { HiTrash } from "react-icons/hi";
 import UserAuth from "../authPages/UserAuth";
 import { Notification } from "../authPages/auth.js";
 import "./dashboard.css";
+import { Button, NotificationPop } from "../components/Elements";
 
 const Dashboard = () => {
   //! set logged in user Credentials
@@ -34,11 +35,16 @@ const Dashboard = () => {
         "Content-Type": "application/json;charset=UTF-8",
       },
     }).then(function (data) {
-      const { fullname, email } = data.data.user;
-      setUserCred({
-        fullname: fullname,
-        email: email,
-      });
+      if (data.data.user !== undefined) {
+        const { fullname, email } = data.data.user;
+        setUserCred({
+          fullname: fullname,
+          email: email,
+        });
+      } else {
+        sessionStorage.clear();
+        window.open("/", "_self");
+      }
     });
   }
 
@@ -66,6 +72,7 @@ const Dashboard = () => {
     });
   }
 
+  //! handle submit request
   function handleSubmit(e) {
     e.preventDefault();
     if (Thought === "") {
@@ -114,7 +121,7 @@ const Dashboard = () => {
     setWrite(true);
   }
 
-  // feedback notification
+  //! feedback notification
   function notification(msg, action, time) {
     const notify = document.querySelector(".notification");
     const MSG = document.querySelector(".msg");
@@ -123,7 +130,7 @@ const Dashboard = () => {
     //? notification(`You can proceed!`, "show", "timer");
   }
 
-  // handle delete thoughs
+  //! handle delete thoughs
   function deleteThought(id) {
     // make a delete request to delete thought
     //! make an asynchronous request to backend endpoint to delete user thought
@@ -154,9 +161,7 @@ const Dashboard = () => {
   return (
     <>
       {/* notification */}
-      <div className="notification">
-        <p className="msg">Notification Message</p>
-      </div>
+      <NotificationPop className="notification" textClass="msg" />
       {/* notification */}
 
       {UserAuth() ? (
@@ -175,14 +180,21 @@ const Dashboard = () => {
                   <textarea
                     name="mind"
                     id="mind"
-                    rows={write ? "4" : "0"}
+                    style={{ height: write ? "100px" : "40px" }}
+                    // rows={write ? "4" : "0"}
                     placeholder="Start Writing..."
                     onChange={(e) => setThought(e.target.value)}
                     value={Thought}
                     onClick={handleWriteNow}
                   ></textarea>
+
                   <div className="keepMyMind">
-                    <button type="submit">Keep My Thought! </button>
+                    {/* display submit button only if user cliks to start adding thought */}
+                    {Thought !== "" ? (
+                      <Button type="submit" text="Keep My Thought!" />
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </form>
 
@@ -209,7 +221,8 @@ const Dashboard = () => {
                     <small>
                       Don't tell us you do not have anything on your mind!{" "}
                       <br />
-                      Don't worry spill it out, you're safe!
+                      Don't worry, Spill it out you're safe! <br />
+                      <i>end-to-end encryption</i>
                     </small>
                   </div>
                 )}
