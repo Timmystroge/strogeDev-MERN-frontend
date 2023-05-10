@@ -37,8 +37,8 @@ const header = () => {
 
                 {UserAuth() && (
                   <li>
-                    <a href="#" onClick={logOut} className="logout">
-                      <BsBoxArrowLeft className="logoutIcon" /> SignOut
+                    <a href="#" onClick={logOut}>
+                      SignOut
                     </a>
                   </li>
                 )}
@@ -46,9 +46,7 @@ const header = () => {
                 {/* show login/signup is user is not logged in */}
                 {!UserAuth() && (
                   <li>
-                    <a href="/login" className="logout">
-                      <BsBoxArrowInRight className="logoutIcon" /> Sign In
-                    </a>
+                    <a href="/login">Sign In</a>
                   </li>
                 )}
               </ul>
