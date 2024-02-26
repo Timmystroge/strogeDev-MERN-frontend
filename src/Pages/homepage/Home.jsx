@@ -25,7 +25,7 @@ const Home = () => {
                 <br />
                 <b style={{color: "crimson"}}>StroMind</b> is designed to Keep your ideas safe!{" "}
                 <br /> Start by signing up if you don't have an account{" "}
-                <br /> <b style={{color: "crimson"}}>or</b> <br /> Sign In if you have an acoount.
+                <br /> <b style={{color: "crimson"}}>or</b> <br /> Sign In if you have an account.
               </p>
             )}
 
